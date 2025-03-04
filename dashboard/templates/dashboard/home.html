@@ -2,127 +2,150 @@
 {% load static %} 
 {% block content %}
 
+
+<style>
+  .carousel-control-prev{
+    background-color: transparent !important;
+    filter: none !important;
+    border: 0cap;
+    left: -2%; /* Adjust the percentage as needed */
+    transform: translatex(-60%);
+  }
+
+  .carousel-control-next{
+    background-color: transparent !important;
+    filter: none !important;
+    border: 0cap;
+    right: -2%; /* Adjust the percentage as needed */
+    transform: translatex(60%);
+  }
+  .carousel-control-prev-icon, 
+  .carousel-control-next-icon {
+    background-color: rgb(8, 8, 8); /* White circle */
+    border-radius: 50%; /* Makes it circular */
+    width: 30px; /* Adjust size */
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .carousel-control-prev-icon::before, 
+  .carousel-control-next-icon::before {
+    content: ''; /* Ensure the default icon is replaced */
+    display: inline-block;
+    width: 5px; /* Adjust icon size */
+    height: 5px;
+    background-color: rgb(253, 243, 243); /* Black icon */
+    mask-size: contain;
+    mask-repeat: no-repeat;
+  }
+
+  .carousel-control-prev-icon::before {
+    mask-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8"><path d="M5.5 0l-4 4 4 4 1-1-3-3 3-3-1-1z"/></svg>'); /* Left arrow */
+  }
+
+  .carousel-control-next-icon::before {
+    mask-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8"><path d="M2.5 0l4 4-4 4-1-1 3-3-3-3 1-1z"/></svg>'); /* Right arrow */
+  }
+
+</style>
+
 <section class="container text-center">
-  <h3>Welcome</h3>
-
+  <h3>Let's Begin!</h3>
   <hr> <br>
-  <div class="row">
-    <div class="col-md-3">
-      <a href="#">
-        <div class="card">
-          <img class="card-img-top" src="{% static 'images/notes.jpg' %}" alt="Notes image">
-          <div class="card-body">
-            <h5 class="card-title ">
-              Notes
-            </h5>
-            Create Notes to refer them later. They are stored permanently until deleted
+  
+  <div id="cardCarousel" class="carousel slide">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <div class="row">
+          <div class="col-lg-3 col-md-4 col-sm-6 col-12 d-flex justify-content-center">
+            <div class="card h-100" onclick="location.href='#';" style="cursor:pointer;">
+              <img class="card-img-top" src="{% static 'images/notes.jpg' %}" alt="Notes image">
+              <div class="card-body">
+                <h5 class="card-title">Notes</h5>
+                <p class="card-text">Create Notes here</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-4 col-sm-6 col-12 d-flex justify-content-center">
+            <div class="card h-100" onclick="location.href='#';" style="cursor:pointer;">
+              <img class="card-img-top" src="{% static 'images/homework.jpg' %}" alt="Homework image">
+              <div class="card-body">
+                <h5 class="card-title">Homework</h5>
+                <p class="card-text">Add & manage</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-4 col-sm-6 col-12 d-flex justify-content-center">
+            <div class="card h-100" onclick="location.href='#';" style="cursor:pointer;">
+              <img class="card-img-top" src="{% static 'images/youtube.jpg' %}" alt="Youtube image">
+              <div class="card-body">
+                <h5 class="card-title">Youtube</h5>
+                <p class="card-text">Search for tutorials</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-4 col-sm-6 col-12 d-flex justify-content-center">
+            <div class="card h-100" onclick="location.href='#';" style="cursor:pointer;">
+              <img class="card-img-top" src="{% static 'images/todo.jpg' %}" alt="To-Do image">
+              <div class="card-body">
+                <h5 class="card-title">To Do</h5>
+                <p class="card-text">Add your to-do lists</p>
+              </div>
+            </div>
           </div>
         </div>
-      </a>
-    </div>
-
-    <div class="col-md-3">
-      <a href="#">
-        <div class="card">
-          <img class="card-img-top" src="{% static 'images/homework.jpg' %}" alt="Notes image">
-          <div class="card-body">
-            <h5 class="card-title ">
-              Homework
-            </h5>
-            Add homeworks and assign them deadlines. They will be displayed prioritised by deadlines
+      </div>
+      <div class="carousel-item">
+        <div class="row">
+          <div class="col-lg-3 col-md-4 col-sm-6 col-12 d-flex justify-content-center">
+            <div class="card h-100" onclick="location.href='#';" style="cursor:pointer;">
+              <img class="card-img-top" src="{% static 'images/books.jpg' %}" alt="Books image">
+              <div class="card-body">
+                <h5 class="card-title">Books</h5>
+                <p class="card-text">Browse books list</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-4 col-sm-6 col-12 d-flex justify-content-center">
+            <div class="card h-100" onclick="location.href='#';" style="cursor:pointer;">
+              <img class="card-img-top" src="{% static 'images/dictionary.jpg' %}" alt="Dictionary image">
+              <div class="card-body">
+                <h5 class="card-title">Dictionary</h5>
+                <p class="card-text">Words, Meanings, Pronounce</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-4 col-sm-6 col-12 d-flex justify-content-center">
+            <div class="card h-100" onclick="location.href='#';" style="cursor:pointer;">
+              <img class="card-img-top" src="{% static 'images/wiki.jpg' %}" alt="Wikipedia image">
+              <div class="card-body">
+                <h5 class="card-title">WikiPedia</h5>
+                <p class="card-text">Search Wikipedia</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-4 col-sm-6 col-12 d-flex justify-content-center">
+            <div class="card h-100" onclick="location.href='#';" style="cursor:pointer;">
+              <img class="card-img-top" src="{% static 'images/conversion.jpg' %}" alt="Conversion image">
+              <div class="card-body">
+                <h5 class="card-title">Conversion</h5>
+                <p class="card-text">Conversion table</p>
+              </div>
+            </div>
           </div>
         </div>
-      </a>
+      </div>
     </div>
-    <div class="col-md-3">
-      <a href="#">
-        <div class="card">
-          <img class="card-img-top" src="{% static 'images/youtube.jpg' %}" alt="Notes image">
-          <div class="card-body">
-            <h5 class="card-title ">
-              Youtube
-            </h5>
-            Search Youtube and select your desired video to play it on youtube
-          </div>
-        </div>
-      </a>
-    </div>
-    <div class="col-md-3">
-      <a href="#">
-        <div class="card">
-          <img class="card-img-top" src="{% static 'images/todo.jpg' %}" alt="Notes image">
-          <div class="card-body">
-            <h5 class="card-title ">
-              To Do
-            </h5>
-            Add your to-do lists for your day and remove them as you finish
-          </div>
-        </div>
-      </a>
-    </div>
+    
+    <button class="carousel-control-prev" type="button" data-bs-target="#cardCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#cardCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    </button>
   </div>
-  <br><br><br>
-  <div class="row">
-    <div class="col-md-3 ">
-      <a href="#">
-        <div class="card mt-20">
-          <img class="card-img-top" src="{% static 'images/books.jpg' %}" alt="Notes image">
-          <div class="card-body">
-            <h5 class="card-title ">
-              Books
-            </h5>
-            Browse books from a list of neatly organised book menu
-          </div>
-        </div>
-      </a>
-    </div>
-
-
-
-    <div class="col-md-3">
-      <a href="#">
-        <div class="card">
-          <img class="card-img-top" src="{% static 'images/dictionary.jpg' %}" alt="Notes image">
-          <div class="card-body">
-            <h5 class="card-title ">
-              Dictionary
-            </h5>
-            A vocabulary from a book is troubling you? No problem, enter the word, and the meaning will be displayed
-            almost instantaneously.
-          </div>
-        </div>
-      </a>
-    </div>
-    <div class="col-md-3">
-      <a href="#">
-        <div class="card">
-          <img class="card-img-top" src="{% static 'images/wiki.jpg' %}" alt="Notes image">
-          <div class="card-body">
-            <h5 class="card-title ">
-              WikiPedia
-            </h5>
-            Homework and Assignments? Search wikipedia to get fast results
-          </div>
-        </div>
-      </a>
-    </div>
-
-
-    <div class="col-md-3">
-      <a href="#">
-        <div class="card">
-          <img class="card-img-top" src="{% static 'images/conversion.jpg' %}" alt="Notes image">
-          <div class="card-body">
-            <h5 class="card-title ">
-              Conversion
-            </h5>
-            Check out the conversion table, that helps you to convert measurements to more familiar ones of your choice.
-          </div>
-        </div>
-      </a>
-    </div>
-  </div>
-
-
 </section>
+
 {% endblock content %}
