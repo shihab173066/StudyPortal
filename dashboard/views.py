@@ -130,9 +130,9 @@ def books(request):
     if request.method == "POST":
         form = DashboardForm(request.POST)
         text = request.POST['text']
-        url = "https://www.googleapis.com/books/v1/volumns?q="+text
-        r = request.get(url)
-        answer = r.jason()
+        url = "https://www.googleapis.com/books/v1/volumes?q="+text
+        r = requests.get(url)
+        answer = r.json()
         result_list = []
         for i in range(10):
             result_dict = {
@@ -142,7 +142,7 @@ def books(request):
                 'count':answer['items'][i]['volumeInfo'].get('pageCount'),
                 'categories':answer['items'][i]['volumeInfo'].get('categories'),
                 'rating':answer['items'][i]['volumeInfo'].get('pageRating'),
-                'thumbnail':answer['items'][i]['volumeInfo'].get('imageLinks'),
+                'thumbnail':answer['items'][i]['volumeInfo'].get('imageLinks').get('thumbnail'),
                 'preview':answer['items'][i]['volumeInfo'].get('previewLink'),
             }
             result_list.append(result_dict)
@@ -157,3 +157,53 @@ def books(request):
 
     context = {'form':form}
     return render(request, "dashboard/books.html", context)
+
+
+def conversion(request):
+    if request.method == "POST":
+        form = ConversionForm(request.POST)
+        context = {'form': form, 'input': False}  # Default context
+
+        if request.POST['measurement'] == 'length':
+            measurement_form = ConversionLengthForm()
+            context.update({'m_form': measurement_form, 'input': True})
+
+            if 'input' in request.POST and request.POST['input']:
+                first = request.POST['measure1']
+                second = request.POST['measure2']
+                input_value = request.POST['input']
+                answer = ''
+
+                if input_value and int(input_value) >= 0:
+                    if first == 'yard' and second == 'foot':
+                        answer = f'{input_value} yard = {int(input_value) * 3} foot'
+                    elif first == 'foot' and second == 'yard':
+                        answer = f'{input_value} foot = {int(input_value) / 3} yard'
+
+                context.update({'answer': answer})
+
+        elif request.POST['measurement'] == 'mass':
+            measurement_form = ConversionMassForm()
+            context.update({'m_form': measurement_form, 'input': True})
+
+            if 'input' in request.POST and request.POST['input']:
+                first = request.POST['measure1']
+                second = request.POST['measure2']
+                input_value = request.POST['input']
+                answer = ''
+
+                if input_value and int(input_value) >= 0:
+                    if first == 'pound' and second == 'kilogram':
+                        answer = f'{input_value} pound = {int(input_value) * 0.453592} kilogram'
+                    elif first == 'kilogram' and second == 'pound':
+                        answer = f'{input_value} kilogram = {int(input_value) * 2.20462} pound'
+
+                context.update({'answer': answer})
+
+        return render(request, "dashboard/conversion.html", context)  # Ensure return statement
+
+    else:
+        form = ConversionForm()
+        context = {'form': form, 'input': False}
+    
+    return render(request, "dashboard/conversion.html", context)  # Always return a response
