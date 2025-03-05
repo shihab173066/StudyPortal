@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.views import generic
 from .models import Notes
 from youtubesearchpython import VideosSearch
+import requests
 
 # Create your views here.
 
@@ -126,6 +127,33 @@ def youtube(request):
 
 
 def books(request):
-    form = DashboardForm()
-    context = {"form": form}
+    if request.method == "POST":
+        form = DashboardForm(request.POST)
+        text = request.POST['text']
+        url = "https://www.googleapis.com/books/v1/volumns?q="+text
+        r = request.get(url)
+        answer = r.jason()
+        result_list = []
+        for i in range(10):
+            result_dict = {
+                'title':answer['items'][i]['volumeInfo']['title'],
+                'subtitle':answer['items'][i]['volumeInfo'].get('subtitle'),
+                'description':answer['items'][i]['volumeInfo'].get('description'),
+                'count':answer['items'][i]['volumeInfo'].get('pageCount'),
+                'categories':answer['items'][i]['volumeInfo'].get('categories'),
+                'rating':answer['items'][i]['volumeInfo'].get('pageRating'),
+                'thumbnail':answer['items'][i]['volumeInfo'].get('imageLinks'),
+                'preview':answer['items'][i]['volumeInfo'].get('previewLink'),
+            }
+            result_list.append(result_dict)
+            context = {
+                'form':form, 
+                'results':result_list, 
+            }
+        return render(request, "dashboard/books.html", context)
+
+    else:
+        form = DashboardForm()
+
+    context = {'form':form}
     return render(request, "dashboard/books.html", context)
