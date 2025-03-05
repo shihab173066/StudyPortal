@@ -207,3 +207,17 @@ def conversion(request):
         context = {'form': form, 'input': False}
     
     return render(request, "dashboard/conversion.html", context)  # Always return a response
+
+def register(request):
+    form = UserResgistrationForm()  # Ensure form is always defined
+
+    if request.method == 'POST':
+        form = UserResgistrationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            messages.success(request, f"Account Successfully Created for {username}")
+            return redirect('login')  # Redirect to avoid re-submission on refresh
+
+    context = {'form': form}
+    return render(request, "dashboard/register.html", context)
