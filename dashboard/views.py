@@ -30,3 +30,6 @@ def delete_note(request, pk=None):
 class NotesDetailView(generic.DetailView):
     model = Notes
     template_name = "dashboard/notes_detail.html"
+
+def homework(request):
+    return render(request, 'dashboard/homework.html')
