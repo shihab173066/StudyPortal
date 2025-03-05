@@ -3,6 +3,7 @@ from .forms import *
 from django.contrib import messages
 from django.views import generic
 from .models import Notes
+from youtubesearchpython import VideosSearch
 
 # Create your views here.
 
@@ -87,3 +88,14 @@ def update_homework(request, pk=None):
 def delete_homework(request, pk=None):
     Homework.objects.get(id=pk).delete()
     return redirect('homework')
+
+def youtube(request):
+    if request.method == "POST"
+        form = DashboardForm(request.POST)
+        text = request.POST['text']
+        video = VideosSearch(text,limit=50)
+    else:
+        form = DashboardForm()
+
+    context = {'form':form}
+    return render(request, "dashboard/youtube.html", context)
