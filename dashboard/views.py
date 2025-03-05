@@ -90,7 +90,7 @@ def delete_homework(request, pk=None):
     return redirect('homework')
 
 def youtube(request):
-    if request.method == "POST"
+    if request.method == "POST":
         form = DashboardForm(request.POST)
         text = request.POST['text']
         video = VideosSearch(text,limit=50)
