@@ -126,4 +126,6 @@ def youtube(request):
 
 
 def books(request):
-    return render(request, "dashboard/books.html")
+    form = DashboardForm()
+    context = {"form": form}
+    return render(request, "dashboard/books.html", context)

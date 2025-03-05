@@ -18,4 +18,4 @@ class HomeworkForm(forms.ModelForm):
 
 
 class DashboardForm(forms.Form):
-    text = forms.CharField(max_length=100,label="Search with Keyword: ")
+    text = forms.CharField(max_length=100,label="Search with Keyword ")
