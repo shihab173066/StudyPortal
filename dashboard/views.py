@@ -32,4 +32,10 @@ class NotesDetailView(generic.DetailView):
     template_name = "dashboard/notes_detail.html"
 
 def homework(request):
-    return render(request, 'dashboard/homework.html')
+    homework = Homework.objects.filter(user=request.user)
+    if len(homework) == 0:
+        homework_done = True
+    else:
+        homework_done = False
+    context = {'homeworks':homework, 'homework_done':homework_done}
+    return render(request, 'dashboard/homework.html', context)
