@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-b+=8e@eq20*u152(&7f3355b2jk!wu85z&#muc=ls&s+#&dnpf
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    "StudyPortal.onrender.com",
+    "studyportal-d8sx.onrender.com",
     "localhost",
     "127.0.0.1"
 ]
