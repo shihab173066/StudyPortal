@@ -31,6 +31,10 @@ ALLOWED_HOSTS = [
     "127.0.0.1"
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:8000",
+    "https://studyportal-d8sx.onrender.com",
+]
 
 # Application definition
 
